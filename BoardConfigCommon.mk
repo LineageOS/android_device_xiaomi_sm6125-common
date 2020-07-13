@@ -24,8 +24,6 @@
 
 COMMON_PATH := device/xiaomi/sm6125-common
 
-BOARD_VENDOR := xiaomi
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := trinket
 TARGET_NO_BOOTLOADER := true
