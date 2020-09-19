@@ -33,7 +33,7 @@ public class IFAAManagerImpl extends IFAAManagerV4 {
     private static final int IFAA_TYPE_IRIS = (1 << 1);
     private static final int IFAA_TYPE_SENSOR_FOD = (1 << 4);
     private static final int IFAA_TYPE_2DFA = (1 << 5);
-
+    private static final String CA_CERT_ALIAS_DELIMITER = " ";
     private static volatile IFAAManagerImpl INSTANCE = null;
 
     private static final String INTERFACE_DESCRIPTOR = "vendor.xiaomi.hardware.mlipay@1.0::IMlipayService";
