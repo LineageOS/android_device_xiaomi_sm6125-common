@@ -25,5 +25,8 @@ xiaomi_trinket_init_library_static {
         "system/core/base/include",
         "system/core/init",
         "device/xiaomi/sm6125-common"
+    ],
+    shared_libs: [
+        "libbase",
     ]
 }
