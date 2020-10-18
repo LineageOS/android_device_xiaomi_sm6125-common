@@ -289,41 +289,41 @@ vendor/lib64/vendor.qti.gnss@3.0.so
 vendor/lib64/vendor.qti.hardware.cacert@1.0.so
 
 # Graphics
-vendor/lib64/egl/eglSubDriverAndroid.so
-vendor/lib64/egl/libEGL_adreno.so
+vendor/lib64/egl/eglSubDriverAndroid.so|8ae117d92b7806fa1400d8c176e8da1bc4654388
+vendor/lib64/egl/libEGL_adreno.so|589ae0d65cf3f54e910e46b6be2550722c6aaafd
 vendor/lib64/egl/libGLESv1_CM_adreno.so
-vendor/lib64/egl/libGLESv2_adreno.so
-vendor/lib64/egl/libQTapGLES.so
+vendor/lib64/egl/libGLESv2_adreno.so|cd341192fe4cfccdcb8016e580467ad2aafda151
+vendor/lib64/egl/libQTapGLES.so|3f90eee46aa60352b13e0719d82e3e18915b8841
 vendor/lib64/egl/libq3dtools_adreno.so
-vendor/lib64/egl/libq3dtools_esx.so
+vendor/lib64/egl/libq3dtools_esx.so|ba495faedd9971e9e6ad1725f78624e089bfd850
 vendor/lib64/libC2D2.so
-vendor/lib64/libCB.so
+vendor/lib64/libCB.so|eb88ac69124634dd374ca9da7b3b3a2d923bc464
 vendor/lib64/libOpenCL.so
 vendor/lib64/libadreno_utils.so
-vendor/lib64/libc2d30_bltlib.so
-vendor/lib64/libgsl.so
-vendor/lib64/libllvm-glnext.so
+vendor/lib64/libc2d30_bltlib.so|e0b04e390b9dde3d9d2ba6907b4b257a97de1894
+vendor/lib64/libgsl.so|b92ceaf165e7ee96d63f12eff225b3ba78e3762b
+vendor/lib64/libllvm-glnext.so|692338a2282f03f517f4f5a7af8e60504d5a43f2
 vendor/lib64/libllvm-qcom.so
 vendor/lib64/libpvr.so
-vendor/lib/egl/eglSubDriverAndroid.so
-vendor/lib/egl/libEGL_adreno.so
+vendor/lib/egl/eglSubDriverAndroid.so|85000317ca0d76882069b7305d2b7b345622cc45
+vendor/lib/egl/libEGL_adreno.so|0a703117211d542c4c75cdb65cf80a946e64481a
 vendor/lib/egl/libGLESv1_CM_adreno.so
-vendor/lib/egl/libGLESv2_adreno.so
-vendor/lib/egl/libQTapGLES.so
+vendor/lib/egl/libGLESv2_adreno.so|2c2b98e21426ca1830ca8fec32448ee322a7eb22
+vendor/lib/egl/libQTapGLES.so|bf1823c9b58a40b7208690c257f3b50d0032a278
 vendor/lib/egl/libq3dtools_adreno.so
-vendor/lib/egl/libq3dtools_esx.so
+vendor/lib/egl/libq3dtools_esx.so|6b6b37a24fcacbaf4b2bf905c00e0c06e753bb92
 vendor/lib/libC2D2.so
-vendor/lib/libCB.so
+vendor/lib/libCB.so|22a872874fcd1587acf2e8771e6cf888f5fa7298
 vendor/lib/libOpenCL.so
 vendor/lib/libadreno_utils.so
-vendor/lib/libc2d30_bltlib.so
-vendor/lib/libgsl.so
-vendor/lib/libllvm-glnext.so
+vendor/lib/libc2d30_bltlib.so|3ff9baf59a1e1c56b91a0f509a2dfd36c9e96be2
+vendor/lib/libgsl.so|fb1d31732d0437ab4e8220b70f4630caddc8a02c
+vendor/lib/libllvm-glnext.so|40b416afdb17dda63a9eae6c8137c95d616e9269
 vendor/lib/libllvm-qcom.so
 vendor/lib/libpvr.so
 
 # Graphics (DRM)
-vendor/lib64/libsdedrm.so
+vendor/lib64/libsdedrm.so|19a74c684b7c102c61a520ab238514218bd47b0d
 vendor/lib/libsdedrm.so
 
 # Graphics (HDR)
@@ -334,19 +334,19 @@ vendor/lib/libhdr_tm.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libbccQTI.so
 vendor/lib64/librs_adreno.so
-vendor/lib64/librs_adreno_sha1.so
+vendor/lib64/librs_adreno_sha1.so|e7035c5da13438f7edef0b27106905b29cc23a89
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/libbccQTI.so
 vendor/lib/librs_adreno.so
-vendor/lib/librs_adreno_sha1.so
+vendor/lib/librs_adreno_sha1.so|4e118237d8df196c85a95fa97ea81104d7236fc2
 
 # Graphics (SDM)
-vendor/lib64/libqseed3.so
-vendor/lib64/libsdm-color.so
+vendor/lib64/libqseed3.so|3be58bd9142af303006fad8a4b8d22b3768d44c2
+vendor/lib64/libsdm-color.so|c7144e8d1a04de11947030a8fd0d5940104ed742
 vendor/lib64/libsdm-colormgr-algo.so
 vendor/lib64/libsdm-diag.so
-vendor/lib64/libsdm-disp-vndapis.so
-vendor/lib64/libsdmextension.so
+vendor/lib64/libsdm-disp-vndapis.so|78f59089f14a87a98676f24a7046df60e3ce4857
+vendor/lib64/libsdmextension.so|053e4861a804f9b495d7473fbf5589e59c0a427e
 vendor/lib64/libtinyxml2_1.so
 vendor/lib/libqseed3.so
 vendor/lib/libsdm-color.so
@@ -357,8 +357,8 @@ vendor/lib/libsdmextension.so
 vendor/lib/libtinyxml2_1.so
 
 # Graphics (Vulkan)
-vendor/lib64/hw/vulkan.trinket.so
-vendor/lib/hw/vulkan.trinket.so
+vendor/lib64/hw/vulkan.trinket.so|b584c4d661bd415427fc02ad2f4139348cae07fe
+vendor/lib/hw/vulkan.trinket.so|56cffb41b29e21432e81ef89b35a18124e1522b1
 
 # Keystore
 vendor/bin/hw/android.hardware.keymaster@4.0-service-qti
@@ -470,7 +470,7 @@ vendor/lib64/libperipheral_client.so
 vendor/bin/hw/vendor.display.color@1.0-service
 vendor/etc/init/vendor.display.color@1.0-service.rc
 vendor/lib64/libdisp-aba.so
-vendor/lib64/libdpps.so
+vendor/lib64/libdpps.so|8a8c047e1cf894c3b0f30ce09fe7881b4289609c
 vendor/lib64/libdisplayqos.so
 vendor/lib64/vendor.display.color@1.0.so
 vendor/lib64/vendor.display.color@1.1.so
