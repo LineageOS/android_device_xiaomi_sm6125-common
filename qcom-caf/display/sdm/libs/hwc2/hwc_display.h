@@ -195,6 +195,10 @@ class HWCDisplay : public DisplayEventHandler {
     return HWC2::Error::Unsupported;
   }
 
+  virtual HWC2::Error SetFrameTriggerMode(uint32_t mode) {
+    return HWC2::Error::Unsupported;
+  }
+
   // Display Configurations
   static uint32_t GetThrottlingRefreshRate() { return HWCDisplay::throttling_refresh_rate_; }
   static void SetThrottlingRefreshRate(uint32_t newRefreshRate)
@@ -212,8 +216,6 @@ class HWCDisplay : public DisplayEventHandler {
   }
 
   uint32_t GetMaxRefreshRate() { return max_refresh_rate_; }
-  int SetPanelBrightness(int level);
-  int GetPanelBrightness(int *level);
   int ToggleScreenUpdates(bool enable);
   int ColorSVCRequestRoute(const PPDisplayAPIPayload &in_payload, PPDisplayAPIPayload *out_payload,
                            PPPendingParams *pending_action);
@@ -286,6 +288,12 @@ class HWCDisplay : public DisplayEventHandler {
     return HWC2::Error::Unsupported;
   }
   virtual HWC2::Error SetPendingRefresh() {
+    return HWC2::Error::Unsupported;
+  }
+  virtual HWC2::Error SetPanelBrightness(float brightness) {
+    return HWC2::Error::Unsupported;
+  }
+  virtual HWC2::Error GetPanelBrightness(float *brightness) {
     return HWC2::Error::Unsupported;
   }
   virtual HWC2::Error GetDisplayConfigs(uint32_t *out_num_configs, hwc2_config_t *out_configs);

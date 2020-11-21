@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2014 - 2019, The Linux Foundation. All rights reserved.
+* Copyright (c) 2014 - 2020, The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are permitted
 * provided that the following conditions are met:
@@ -162,6 +162,14 @@ enum QSyncMode {
   kQSyncModeContinuous,         // This is set by the client to enable qsync forever
   kQsyncModeOneShot,            // This is set by client to enable qsync only for current frame.
   kQsyncModeOneShotContinuous,  // This is set by client to enable qsync only for every commit.
+};
+
+/*! @brief This enum defines frame trigger modes. */
+enum FrameTriggerMode {
+  kFrameTriggerDefault,      //!< Wait for pp_done of previous frame to trigger new frame
+  kFrameTriggerSerialize,    //!< Trigger new frame and wait for pp_done of this frame
+  kFrameTriggerPostedStart,  //!< Posted start mode, trigger new frame without pp_done
+  kFrameTriggerMax,
 };
 
 /*! @brief This structure defines configuration for display dpps ad4 region of interest. */
@@ -536,13 +544,13 @@ class DisplayInterface {
   */
   virtual bool IsUnderscanSupported() = 0;
 
-  /*! @brief Method to set brightness of the primary display.
+  /*! @brief Method to set brightness of the builtin display.
 
-    @param[in] level the new backlight level.
+    @param[in] brightness the new backlight level 0.0f(min) to 1.0f(max) where -1.0f represents off.
 
     @return \link DisplayError \endlink
   */
-  virtual DisplayError SetPanelBrightness(int level) = 0;
+  virtual DisplayError SetPanelBrightness(float brightness) = 0;
 
   /*! @brief Method to notify display about change in min HDCP encryption level.
 
@@ -645,11 +653,11 @@ class DisplayInterface {
 
   /*! @brief Method to get the brightness level of the display
 
-    @param[out] level brightness level
+    @param[out] brightness brightness percentage
 
     @return \link DisplayError \endlink
   */
-  virtual DisplayError GetPanelBrightness(int *level) = 0;
+  virtual DisplayError GetPanelBrightness(float *brightness) = 0;
 
   /*! @brief Method to set layer mixer resolution.
 
@@ -804,6 +812,12 @@ class DisplayInterface {
     @return \link DisplayError \endlink
   */
   virtual DisplayError TeardownConcurrentWriteback(void) = 0;
+
+  /*! @brief Method to set frame trigger mode for primary display.
+    @param[in] frame trigger mode
+    @return \link DisplayError \endlink
+  */
+  virtual DisplayError SetFrameTriggerMode(FrameTriggerMode mode) = 0;
 
   /*
    * Returns a string consisting of a dump of SDM's display and layer related state

@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+* Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -724,6 +724,13 @@ void HWDeviceDRM::PopulateHWPanelInfo() {
   GetHWDisplayPortAndMode();
   GetHWPanelMaxBrightness();
 
+  if (current_mode.flags & DRM_MODE_FLAG_CMD_MODE_PANEL) {
+    hw_panel_info_.mode = kModeCommand;
+  }
+  if (current_mode.flags & DRM_MODE_FLAG_VID_MODE_PANEL) {
+    hw_panel_info_.mode = kModeVideo;
+  }
+
   DLOGI_IF(kTagDisplay, "%s, Panel Interface = %s, Panel Mode = %s, Is Primary = %d", device_name_,
         interface_str_.c_str(), hw_panel_info_.mode == kModeVideo ? "Video" : "Command",
         hw_panel_info_.is_primary_panel);
@@ -803,27 +810,6 @@ void HWDeviceDRM::GetHWDisplayPortAndMode() {
   return;
 }
 
-void HWDeviceDRM::GetHWPanelMaxBrightness() {
-  char brightness[kMaxStringLength] = {0};
-  string kMaxBrightnessNode = "/sys/class/backlight/panel0-backlight/max_brightness";
-
-  hw_panel_info_.panel_max_brightness = 255;
-  int fd = Sys::open_(kMaxBrightnessNode.c_str(), O_RDONLY);
-  if (fd < 0) {
-    DLOGW("Failed to open max brightness node = %s, error = %s", kMaxBrightnessNode.c_str(),
-          strerror(errno));
-    return;
-  }
-
-  if (Sys::pread_(fd, brightness, sizeof(brightness), 0) > 0) {
-    hw_panel_info_.panel_max_brightness = atoi(brightness);
-    DLOGI_IF(kTagDisplay, "Max brightness level = %d", hw_panel_info_.panel_max_brightness);
-  } else {
-    DLOGW("Failed to read max brightness level. error = %s", strerror(errno));
-  }
-
-  Sys::close_(fd);
-}
 
 DisplayError HWDeviceDRM::GetActiveConfig(uint32_t *active_config) {
   *active_config = current_mode_index_;
@@ -855,13 +841,34 @@ DisplayError HWDeviceDRM::SetDisplayAttributes(uint32_t index) {
     return kErrorParameters;
   }
 
+  uint32_t mode_flag = 0;
+  uint32_t curr_mode_flag = 0;
   drmModeModeInfo to_set = connector_info_.modes[index].mode;
+  drmModeModeInfo current_mode = connector_info_.modes[current_mode_index_].mode;
   uint64_t current_bit_clk = connector_info_.modes[current_mode_index_].bit_clk_rate;
+
+  if (to_set.flags & DRM_MODE_FLAG_CMD_MODE_PANEL) {
+    mode_flag = DRM_MODE_FLAG_CMD_MODE_PANEL;
+  } else if (to_set.flags & DRM_MODE_FLAG_VID_MODE_PANEL) {
+    mode_flag = DRM_MODE_FLAG_VID_MODE_PANEL;
+  }
+
+  if (current_mode.flags & DRM_MODE_FLAG_CMD_MODE_PANEL) {
+    curr_mode_flag = DRM_MODE_FLAG_CMD_MODE_PANEL;
+  } else if (current_mode.flags & DRM_MODE_FLAG_VID_MODE_PANEL) {
+    curr_mode_flag = DRM_MODE_FLAG_VID_MODE_PANEL;
+  }
+
+  if (curr_mode_flag != mode_flag) {
+    panel_mode_changed_ = mode_flag;
+  }
+
   for (uint32_t mode_index = 0; mode_index < connector_info_.modes.size(); mode_index++) {
     if ((to_set.vdisplay == connector_info_.modes[mode_index].mode.vdisplay) &&
         (to_set.hdisplay == connector_info_.modes[mode_index].mode.hdisplay) &&
         (to_set.vrefresh == connector_info_.modes[mode_index].mode.vrefresh) &&
-        (current_bit_clk == connector_info_.modes[mode_index].bit_clk_rate)) {
+        (current_bit_clk == connector_info_.modes[mode_index].bit_clk_rate) &&
+	(mode_flag & connector_info_.modes[mode_index].mode.flags)) {
       index = mode_index;
       break;
     }
@@ -874,14 +881,15 @@ DisplayError HWDeviceDRM::SetDisplayAttributes(uint32_t index) {
   DLOGI_IF(
       kTagDisplay,
       "Display attributes[%d]: WxH: %dx%d, DPI: %fx%f, FPS: %d, LM_SPLIT: %d, V_BACK_PORCH: %d,"
-      " V_FRONT_PORCH: %d, V_PULSE_WIDTH: %d, V_TOTAL: %d, H_TOTAL: %d, CLK: %dKHZ, TOPOLOGY: %d",
-      index, display_attributes_[index].x_pixels, display_attributes_[index].y_pixels,
-      display_attributes_[index].x_dpi, display_attributes_[index].y_dpi,
-      display_attributes_[index].fps, display_attributes_[index].is_device_split,
-      display_attributes_[index].v_back_porch, display_attributes_[index].v_front_porch,
-      display_attributes_[index].v_pulse_width, display_attributes_[index].v_total,
-      display_attributes_[index].h_total, display_attributes_[index].clock_khz,
-      display_attributes_[index].topology);
+      " V_FRONT_PORCH: %d, V_PULSE_WIDTH: %d, V_TOTAL: %d, H_TOTAL: %d, CLK: %dKHZ,"
+      "TOPOLOGY: %d, PanelMode %s", index, display_attributes_[index].x_pixels,
+      display_attributes_[index].y_pixels, display_attributes_[index].x_dpi,
+      display_attributes_[index].y_dpi, display_attributes_[index].fps,
+      display_attributes_[index].is_device_split, display_attributes_[index].v_back_porch,
+      display_attributes_[index].v_front_porch, display_attributes_[index].v_pulse_width,
+      display_attributes_[index].v_total, display_attributes_[index].h_total,
+      display_attributes_[index].clock_khz, display_attributes_[index].topology,
+      (mode_flag & DRM_MODE_FLAG_VID_MODE_PANEL) ? "Video" : "Command");
 
   return kErrorNone;
 }
@@ -1208,6 +1216,21 @@ void HWDeviceDRM::SetupAtomic(HWLayers *hw_layers, bool validate) {
     drm_atomic_intf_->Perform(DRMOps::CRTC_SET_SECURITY_LEVEL, token_.crtc_id, crtc_security_level);
   }
 
+  if (reset_output_fence_offset_ && !validate) {
+    // Change back the fence_offset
+    drm_atomic_intf_->Perform(DRMOps::CRTC_SET_OUTPUT_FENCE_OFFSET, token_.crtc_id, 0);
+    reset_output_fence_offset_ = false;
+  }
+
+  // Set panel mode
+  if (panel_mode_changed_ & DRM_MODE_FLAG_VID_MODE_PANEL) {
+    if (!validate) {
+      // Switch to video mode, corresponding change the fence_offset
+      drm_atomic_intf_->Perform(DRMOps::CRTC_SET_OUTPUT_FENCE_OFFSET, token_.crtc_id, 1);
+    }
+    SetFullROI();
+  }
+
   if (hw_layers->hw_avr_info.update) {
     sde_drm::DRMQsyncMode mode = sde_drm::DRMQsyncMode::NONE;
     if (hw_layers->hw_avr_info.mode == kContinuousMode) {
@@ -1238,6 +1261,7 @@ void HWDeviceDRM::SetupAtomic(HWLayers *hw_layers, bool validate) {
       if ((current_mode.vdisplay == connector_info_.modes[mode_index].mode.vdisplay) &&
           (current_mode.hdisplay == connector_info_.modes[mode_index].mode.hdisplay) &&
           (current_bit_clk == connector_info_.modes[mode_index].bit_clk_rate) &&
+          (current_mode.flags == connector_info_.modes[mode_index].mode.flags) &&
           (vrefresh_ == connector_info_.modes[mode_index].mode.vrefresh)) {
         current_mode = connector_info_.modes[mode_index].mode;
         break;
@@ -1250,6 +1274,7 @@ void HWDeviceDRM::SetupAtomic(HWLayers *hw_layers, bool validate) {
       if ((current_mode.vdisplay == connector_info_.modes[mode_index].mode.vdisplay) &&
           (current_mode.hdisplay == connector_info_.modes[mode_index].mode.hdisplay) &&
           (current_mode.vrefresh == connector_info_.modes[mode_index].mode.vrefresh) &&
+          (current_mode.flags == connector_info_.modes[mode_index].mode.flags) &&
           (bit_clk_rate_ == connector_info_.modes[mode_index].bit_clk_rate)) {
         current_mode = connector_info_.modes[mode_index].mode;
         break;
@@ -1274,7 +1299,7 @@ void HWDeviceDRM::SetupAtomic(HWLayers *hw_layers, bool validate) {
   }
 
   // Set CRTC mode, only if display config changes
-  if (vrefresh_ || update_mode_) {
+  if (vrefresh_ || update_mode_ || panel_mode_changed_) {
     drm_atomic_intf_->Perform(DRMOps::CRTC_SET_MODE, token_.crtc_id, &current_mode);
   }
 
@@ -1340,6 +1365,7 @@ DisplayError HWDeviceDRM::Validate(HWLayers *hw_layers) {
   if (ret) {
     DLOGE("failed with error %d for %s", ret, device_name_);
     vrefresh_ = 0;
+    panel_mode_changed_ = 0;
     err = kErrorHardware;
   }
 
@@ -1421,6 +1447,7 @@ DisplayError HWDeviceDRM::AtomicCommit(HWLayers *hw_layers) {
   if (ret) {
     DLOGE("%s failed with error %d crtc %d", __FUNCTION__, ret, token_.crtc_id);
     vrefresh_ = 0;
+    panel_mode_changed_ = 0;
     CloseFd(&release_fence);
     CloseFd(&retire_fence);
     release_fence_ = -1;
@@ -1476,6 +1503,15 @@ DisplayError HWDeviceDRM::AtomicCommit(HWLayers *hw_layers) {
       }
     }
     bit_clk_rate_ = 0;
+  }
+
+   if (panel_mode_changed_ & DRM_MODE_FLAG_CMD_MODE_PANEL) {
+    panel_mode_changed_ = 0;
+    synchronous_commit_ = false;
+  } else if (panel_mode_changed_ & DRM_MODE_FLAG_VID_MODE_PANEL) {
+    panel_mode_changed_ = 0;
+    synchronous_commit_ = false;
+    reset_output_fence_offset_ = true;
   }
 
   first_cycle_ = false;
@@ -1684,6 +1720,30 @@ void HWDeviceDRM::SetIdleTimeoutMs(uint32_t timeout_ms) {
 }
 
 DisplayError HWDeviceDRM::SetDisplayMode(const HWDisplayMode hw_display_mode) {
+  uint32_t mode_flag;
+
+  if (hw_display_mode == kModeCommand) {
+    mode_flag = DRM_MODE_FLAG_CMD_MODE_PANEL;
+    DLOGI("switch panel mode to command");
+  } else if (hw_display_mode == kModeVideo) {
+    mode_flag = DRM_MODE_FLAG_VID_MODE_PANEL;
+    DLOGI("switch panel mode to video");
+  }
+
+  drmModeModeInfo current_mode = connector_info_.modes[current_mode_index_].mode;
+  for (uint32_t mode_index = 0; mode_index < connector_info_.modes.size(); mode_index++) {
+    if ((current_mode.vdisplay == connector_info_.modes[mode_index].mode.vdisplay) &&
+        (current_mode.hdisplay == connector_info_.modes[mode_index].mode.hdisplay) &&
+        (current_mode.vrefresh == connector_info_.modes[mode_index].mode.vrefresh) &&
+        (mode_flag & connector_info_.modes[mode_index].mode.flags)) {
+      current_mode_index_ = mode_index;
+      PopulateHWPanelInfo();
+      panel_mode_changed_ = mode_flag;
+      synchronous_commit_ = true;
+      return kErrorNone;
+    }
+  }
+
   return kErrorNotSupported;
 }
 
@@ -1701,6 +1761,7 @@ DisplayError HWDeviceDRM::SetRefreshRate(uint32_t refresh_rate) {
     if ((current_mode.vdisplay == connector_info_.modes[mode_index].mode.vdisplay) &&
         (current_mode.hdisplay == connector_info_.modes[mode_index].mode.hdisplay) &&
         (current_bit_clk == connector_info_.modes[mode_index].bit_clk_rate) &&
+        (current_mode.flags == connector_info_.modes[mode_index].mode.flags) &&
         (refresh_rate == connector_info_.modes[mode_index].mode.vrefresh)) {
       vrefresh_ = refresh_rate;
       DLOGV_IF(kTagDriverConfig, "Set refresh rate to %d", refresh_rate);
@@ -1710,59 +1771,7 @@ DisplayError HWDeviceDRM::SetRefreshRate(uint32_t refresh_rate) {
   return kErrorNotSupported;
 }
 
-DisplayError HWDeviceDRM::SetPanelBrightness(int level) {
-  DisplayError err = kErrorNone;
-  char buffer[kMaxSysfsCommandLength] = {0};
 
-  DLOGV_IF(kTagDriverConfig, "Set brightness level to %d", level);
-  int fd = Sys::open_(kBrightnessNode, O_RDWR);
-  if (fd < 0) {
-    DLOGV_IF(kTagDriverConfig, "Failed to open node = %s, error = %s ", kBrightnessNode,
-             strerror(errno));
-    return kErrorFileDescriptor;
-  }
-
-  int32_t bytes = snprintf(buffer, kMaxSysfsCommandLength, "%d\n", level);
-  ssize_t ret = Sys::pwrite_(fd, buffer, static_cast<size_t>(bytes), 0);
-  if (ret <= 0) {
-    DLOGV_IF(kTagDriverConfig, "Failed to write to node = %s, error = %s ", kBrightnessNode,
-             strerror(errno));
-    err = kErrorHardware;
-  }
-
-  Sys::close_(fd);
-
-  return err;
-}
-
-DisplayError HWDeviceDRM::GetPanelBrightness(int *level) {
-  DisplayError err = kErrorNone;
-  char brightness[kMaxStringLength] = {0};
-
-  if (!level) {
-    DLOGV_IF(kTagDriverConfig, "Invalid input, null pointer.");
-    return kErrorParameters;
-  }
-
-  int fd = Sys::open_(kBrightnessNode, O_RDWR);
-  if (fd < 0) {
-    DLOGV_IF(kTagDriverConfig, "Failed to open brightness node = %s, error = %s", kBrightnessNode,
-             strerror(errno));
-    return kErrorFileDescriptor;
-  }
-
-  if (Sys::pread_(fd, brightness, sizeof(brightness), 0) > 0) {
-    *level = atoi(brightness);
-    DLOGV_IF(kTagDriverConfig, "Brightness level = %d", *level);
-  } else {
-    DLOGV_IF(kTagDriverConfig, "Failed to read panel brightness");
-    err = kErrorHardware;
-  }
-
-  Sys::close_(fd);
-
-  return err;
-}
 
 DisplayError HWDeviceDRM::GetHWScanInfo(HWScanInfo *scan_info) {
   return kErrorNotSupported;
@@ -2124,7 +2133,7 @@ void HWDeviceDRM::DumpConnectorModeInfo() {
 
 void HWDeviceDRM::SetFullROI() {
   // Reset the CRTC ROI and connector ROI only for the panel that supports partial update
-  if (!hw_panel_info_.partial_update) {
+  if (!hw_panel_info_.partial_update && !panel_mode_changed_) {
     return;
   }
   uint32_t index = current_mode_index_;

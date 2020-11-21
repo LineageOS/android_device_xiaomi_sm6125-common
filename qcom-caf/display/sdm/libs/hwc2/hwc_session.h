@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2019, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014-2020, The Linux Foundation. All rights reserved.
  * Not a Contribution.
  *
  * Copyright 2015 The Android Open Source Project
@@ -208,6 +208,8 @@ class HWCSession : hwc2_device_t, HWCUEventListener, IDisplayConfig, public qCli
                                         uint32_t *outNumCapabilities, uint32_t *outCapabilities);
   static int32_t GetDisplayBrightnessSupport(hwc2_device_t *device, hwc2_display_t display,
                                              bool *outSupport);
+  static int32_t SetDisplayBrightness(hwc2_device_t *device, hwc2_display_t display,
+                                      float brightness);
 
   // HWCDisplayEventHandler
   virtual void DisplayPowerReset();
@@ -268,11 +270,12 @@ class HWCSession : hwc2_device_t, HWCUEventListener, IDisplayConfig, public qCli
   int32_t ControlPartialUpdate(int dpy, bool enable);
   int32_t DisplayBWTransactionPending(bool *status);
   int32_t SetSecondaryDisplayStatus(int disp_id, HWCDisplay::DisplayStatus status);
-  int32_t GetPanelBrightness(int *level);
   int32_t MinHdcpEncryptionLevelChanged(int disp_id, uint32_t min_enc_level);
   int32_t IsWbUbwcSupported(int *value);
   int32_t SetDynamicDSIClock(int64_t disp_id, uint32_t bitrate);
   bool HasHDRSupport(HWCDisplay *hwc_display);
+  int32_t getDisplayBrightness(uint32_t display, float *brightness);
+  int32_t setDisplayBrightness(uint32_t display, float brightness);
 
   // service methods
   void StartServices();
@@ -367,6 +370,7 @@ class HWCSession : hwc2_device_t, HWCUEventListener, IDisplayConfig, public qCli
   android::status_t GetSupportedDsiClk(const android::Parcel *input_parcel,
                                        android::Parcel *output_parcel);
   android::status_t SetPanelLuminanceAttributes(const android::Parcel *input_parcel);
+  android::status_t SetFrameTriggerMode(const android::Parcel *input_parcel);
 
   void Refresh(hwc2_display_t display);
   void HotPlug(hwc2_display_t display, HWC2::Connection state);

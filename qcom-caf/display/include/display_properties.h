@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 - 2019, The Linux Foundation. All rights reserved.
+* Copyright (c) 2018 - 2020 The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -129,5 +129,10 @@
 #define DISABLE_UI_3D_TONEMAP                DISPLAY_PROP("disable_ui_3d_tonemap")
 #define DISABLE_PARALLEL_CACHE               DISPLAY_PROP("disable_parallel_cache")
 #define ENABLE_FORCE_SPLIT                   DISPLAY_PROP("enable_force_split")
+#define DISABLE_IDLE_TIME_VIDEO              DISPLAY_PROP("disable_idle_time_video")
+#define DISABLE_IDLE_TIME_HDR                DISPLAY_PROP("disable_idle_time_hdr")
+
+// Enable posted start dynamic
+#define ENABLE_POSTED_START_DYN_PROP         DISPLAY_PROP("enable_posted_start_dyn")
 
 #endif  // __DISPLAY_PROPERTIES_H__

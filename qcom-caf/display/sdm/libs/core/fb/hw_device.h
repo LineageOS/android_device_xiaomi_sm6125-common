@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2014 - 2019, The Linux Foundation. All rights reserved.
+* Copyright (c) 2014 - 2020, The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are permitted
 * provided that the following conditions are met:
@@ -117,6 +117,7 @@ class HWDevice : public HWInterface {
                                                     uint8_t *out_data) {
     return kErrorNotSupported;
   }
+  virtual DisplayError SetFrameTrigger(FrameTriggerMode mode) { return kErrorNotSupported; }
 
   enum {
     kHWEventVSync,

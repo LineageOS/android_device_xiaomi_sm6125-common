@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+* Copyright (c) 2017 - 2020, The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -396,6 +396,12 @@ enum struct DRMOps {
    *      uint32_t - Topology control bit-mask
    */
   CONNECTOR_SET_TOPOLOGY_CONTROL,
+  /*
+   * Op: Sets frame trigger mode on this connector
+   * Arg: uint32_t - Connector ID
+   *      uint32_t - Frame trigger mode
+   */
+  CONNECTOR_SET_FRAME_TRIGGER,
 };
 
 enum struct DRMRotation {
@@ -606,6 +612,7 @@ struct DRMConnectorInfo {
   uint32_t mmWidth;
   uint32_t mmHeight;
   uint32_t type;
+  uint32_t type_id;
   std::vector<DRMModeInfo> modes;
   std::string panel_name;
   DRMPanelMode panel_mode;
@@ -809,6 +816,12 @@ struct DRMSolidfillStage {
   uint32_t color_bit_depth = 0;
   uint32_t z_order = 0;
   uint32_t plane_alpha = 0xff;
+};
+
+enum struct DRMFrameTriggerMode {
+  FRAME_DONE_WAIT_DEFAULT = 0,
+  FRAME_DONE_WAIT_SERIALIZE,
+  FRAME_DONE_WAIT_POSTED_START,
 };
 
 /* DRM Atomic Request Property Set.

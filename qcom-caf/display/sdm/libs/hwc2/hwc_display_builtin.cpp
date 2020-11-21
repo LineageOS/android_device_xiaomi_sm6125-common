@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2014-2019, The Linux Foundation. All rights reserved.
+* Copyright (c) 2014-2020, The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -540,6 +540,26 @@ HWC2::Error HWCDisplayBuiltIn::SetDisplayDppsAdROI(uint32_t h_start, uint32_t h_
   return HWC2::Error::None;
 }
 
+HWC2::Error HWCDisplayBuiltIn::SetFrameTriggerMode(uint32_t mode) {
+  DisplayError error = kErrorNone;
+  FrameTriggerMode trigger_mode = kFrameTriggerDefault;
+
+  if (mode >= kFrameTriggerMax) {
+    DLOGE("Invalid input mode %d", mode);
+    return HWC2::Error::BadParameter;
+  }
+
+  trigger_mode = static_cast<FrameTriggerMode>(mode);
+  error = display_intf_->SetFrameTriggerMode(trigger_mode);
+  if (error)
+    return HWC2::Error::BadConfig;
+
+  callbacks_->Refresh(HWC_DISPLAY_PRIMARY);
+  validated_ = false;
+
+  return HWC2::Error::None;
+}
+
 int HWCDisplayBuiltIn::Perform(uint32_t operation, ...) {
   va_list args;
   va_start(args, operation);
@@ -975,4 +995,21 @@ HWC2::Error HWCDisplayBuiltIn::PostCommitLayerStack(int32_t *out_retire_fence) {
   return HWCDisplay::PostCommitLayerStack(out_retire_fence);
 }
 
+HWC2::Error HWCDisplayBuiltIn::SetPanelBrightness(float brightness) {
+  DisplayError ret = display_intf_->SetPanelBrightness(brightness);
+  if (ret != kErrorNone) {
+    return HWC2::Error::NoResources;
+  }
+
+  return HWC2::Error::None;
+}
+
+HWC2::Error HWCDisplayBuiltIn::GetPanelBrightness(float *brightness) {
+  DisplayError ret = display_intf_->GetPanelBrightness(brightness);
+  if (ret != kErrorNone) {
+    return HWC2::Error::NoResources;
+  }
+
+  return HWC2::Error::None;
+}
 }  // namespace sdm
