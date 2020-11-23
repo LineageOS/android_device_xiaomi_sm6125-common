@@ -189,7 +189,6 @@ PRODUCT_PACKAGES += \
     memtrack.trinket \
     libdisplayconfig \
     libdisplayconfig.vendor \
-    liboverlay \
     libtinyxml \
     libvulkan \
     libqdMetaData \
