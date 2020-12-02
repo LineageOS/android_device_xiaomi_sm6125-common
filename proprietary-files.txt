@@ -1,4 +1,4 @@
-# ginkgo package version: QKQ1.200114.002 20.7.9, unless stated otherwise
+# ginkgo package version: QKQ1.200114.002 v12.0.2.0.QCOMIXM, unless stated otherwise
 
 # ACDB loader
 vendor/lib64/libacdb-fts.so
@@ -596,7 +596,8 @@ vendor/radio/qcril_database/upgrade/1_version_intro.sql
 vendor/radio/qcril_database/upgrade/2_version_add_wps_config.sql
 vendor/radio/qcril_database/upgrade/3_version_update_wps_config.sql
 vendor/radio/qcril_database/upgrade/4_version_update_ecc_table.sql
-vendor/radio/qcril_database/upgrade/5_version_update_ecc_table.sql
+vendor/radio/qcril_database/upgrade/5_version_intro.sql
+vendor/radio/qcril_database/upgrade/6_version_update_ecc_table.sql
 
 # Radio - IMS
 etc/permissions/com.qualcomm.qti.imscmservice.xml
