@@ -159,6 +159,10 @@ PRODUCT_PACKAGES += \
     libdng_sdk.vendor \
     vendor.qti.hardware.camera.device@1.0
 
+# ConfigStore
+PRODUCT_PACKAGES += \
+    disable_configstore
+
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
     cneapiclient \
