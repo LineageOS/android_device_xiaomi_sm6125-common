@@ -41,3 +41,6 @@ sys.thermal.                            u:object_r:thermal_engine_prop:s0
 
 # Wlan
 persist.vendor.wigig.npt.enable         u:object_r:vendor_default_prop:s0
+
+# Wifi Display
+persist.vendor.setWFDInfo.  u:object_r:vendor_wfd_sys_debug_prop:s0
