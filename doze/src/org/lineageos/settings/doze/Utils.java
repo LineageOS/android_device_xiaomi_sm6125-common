@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2018 The LineageOS Project
+ *               2017-2019,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public final class Utils {
 
     private static final String TAG = "DozeUtils";
     private static final boolean DEBUG = false;
-
+    protected static final String DOZE_ENABLE = "doze_enable";
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
 
     protected static final String CATEG_PROX_SENSOR = "proximity_sensor";
