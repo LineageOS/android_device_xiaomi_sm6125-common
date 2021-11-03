@@ -1,4 +1,4 @@
-/* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -501,7 +501,7 @@ public:
     inline SystemStatusNetworkInfo(const NetworkInfoDataItemBase& itemBase) :
             NetworkInfoDataItemBase(itemBase),
             mSrcObjPtr((NetworkInfoDataItemBase*)&itemBase) {
-        mType = itemBase.getType();
+        mType = (int32_t)itemBase.getType();
     }
     inline bool equals(const SystemStatusNetworkInfo& peer) {
         for (uint8_t i = 0; i < MAX_NETWORK_HANDLES; ++i) {
@@ -513,9 +513,6 @@ public:
     }
     inline virtual SystemStatusItemBase& collate(SystemStatusItemBase& curInfo) {
         uint64_t allTypes = (static_cast<SystemStatusNetworkInfo&>(curInfo)).mAllTypes;
-        uint64_t networkHandle =
-                (static_cast<SystemStatusNetworkInfo&>(curInfo)).mNetworkHandle;
-        int32_t type = (static_cast<SystemStatusNetworkInfo&>(curInfo)).mType;
         // Replace current with cached table for now and then update
         memcpy(mAllNetworkHandles,
                (static_cast<SystemStatusNetworkInfo&>(curInfo)).getNetworkHandle(),
@@ -542,18 +539,21 @@ public:
                  ++lastValidIndex) {
                 // Maintain count for number of network handles still
                 // connected for given type
-                if (mType == mAllNetworkHandles[lastValidIndex].networkType) {
-                    typeCount++;
+                if (mType == (int32_t)mAllNetworkHandles[lastValidIndex].networkType) {
+                    if (mNetworkHandle == mAllNetworkHandles[lastValidIndex].networkHandle) {
+                        deletedIndex = lastValidIndex;
+                    } else {
+                        typeCount++;
+                    }
                 }
 
-                if (mNetworkHandle == mAllNetworkHandles[lastValidIndex].networkHandle) {
-                    deletedIndex = lastValidIndex;
-                    typeCount--;
-                }
+            }
+            if (lastValidIndex > 0) {
+                --lastValidIndex;
             }
 
             if (MAX_NETWORK_HANDLES != deletedIndex) {
-                LOC_LOGD("deletedIndex:%u, lastValidIndex:%u, typeCount:%u",
+                LOC_LOGd("deletedIndex:%u, lastValidIndex:%u, typeCount:%u",
                         deletedIndex, lastValidIndex, typeCount);
                 mAllNetworkHandles[deletedIndex] = mAllNetworkHandles[lastValidIndex];
                 mAllNetworkHandles[lastValidIndex].networkHandle = NETWORK_HANDLE_UNKNOWN;
