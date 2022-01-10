@@ -96,7 +96,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.vendor.bt.a2dp.aac_whitelist=false \
     persist.vendor.qcom.bluetooth.enable.splita2dp=true \
+    persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=false \
     persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxhd-aac-ldac \
+    persist.vendor.qcom.bluetooth.enable.splita2dp=true \
+    persist.vendor.qcom.bluetooth.scram.enabled=true \
+    persist.vendor.qcom.bluetooth.soc=cherokee \
     ro.bluetooth.library_name=libbluetooth_qti.so \
     vendor.bluetooth.soc=cherokee
 
@@ -166,7 +170,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.stagefright.omx_default_rank.sw-audio=1 \
     debug.stagefright.omx_default_rank=0 \
     media.stagefright.thumbnail.prefer_hw_codecs=true \
     vendor.vidc.dec.enable.downscalar=1 \
@@ -201,6 +204,9 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Sensor
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.sensors.enable.bypass_worker=true \
+    persist.vendor.sensors.enable.rt_task=false \
+    persist.vendor.sensors.support_direct_channel=false \
     ro.vendor.sdk.sensors.gestures=false \
     ro.vendor.sensors.cmc=false \
     ro.vendor.sensors.facing=false \
