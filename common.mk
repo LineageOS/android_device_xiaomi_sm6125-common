@@ -21,6 +21,9 @@
 # definition file).
 #
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 # Inherit properties
 $(call inherit-product, $(LOCAL_PATH)/properties.mk)
 
