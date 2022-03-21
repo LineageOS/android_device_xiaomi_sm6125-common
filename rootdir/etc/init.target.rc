@@ -550,3 +550,6 @@ on property:sys.thermallct.isincall=0
 
 on property:ro.vendor.miui.region=*
     start audioshell_service
+
+on property:ro.boot.hwversion=*
+    setprop vendor.boot.hwversion ${ro.boot.hwversion}
