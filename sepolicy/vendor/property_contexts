@@ -41,3 +41,7 @@ sys.thermal.                            u:object_r:thermal_engine_prop:s0
 
 # Wlan
 persist.vendor.wigig.npt.enable         u:object_r:vendor_default_prop:s0
+
+# Xiaomi specific build properties
+ro.boot.hwc                        u:object_r:build_prop:s0
+ro.boot.hwversion                  u:object_r:build_prop:s0
