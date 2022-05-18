@@ -430,7 +430,8 @@ PRODUCT_PACKAGES += \
     rild \
     librmnetctl \
     libxml2 \
-    libprotobuf-cpp-full
+    libprotobuf-cpp-full \
+    vendor.qti.hardware.camera.device@1.0:64
 
 PRODUCT_PACKAGES += \
     ims-ext-common \
