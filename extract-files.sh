@@ -73,6 +73,10 @@ function blob_fixup() {
         "${PATCHELF}" --remove-needed vendor.xiaomi.hardware.mtdservice@1.0.so "${2}"
         sed -i "s|/system/etc/firmware|/vendor/firmware\x0\x0\x0\x0|g" "${2}"
         ;;
+
+    system_ext/lib64/lib-imsvideocodec.so)
+        ${PATCHELF} --add-needed "lib-imsvtshim.so" "${2}"
+        ;;
     esac
 }
 
