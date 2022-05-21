@@ -56,7 +56,6 @@ vendor/lib/libhdmiedid.so
 vendor/lib/libhdmipassthru.so
 vendor/lib/libhfp.so
 vendor/lib/libqtigef.so
-vendor/lib/libssrec.so
 vendor/lib/libsurround_3mic_proc.so
 vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
