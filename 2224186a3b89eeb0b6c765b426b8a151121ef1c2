@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90be1447_585cfdc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 26916
+      },
+      "writtenOn": "2022-05-22T18:04:42Z",
+      "side": 1,
+      "message": "There\u0027s a better approach for that: https://review.lineageos.org/c/LineageOS/android_device_razer_aura/+/327735",
+      "revId": "2224186a3b89eeb0b6c765b426b8a151121ef1c2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
