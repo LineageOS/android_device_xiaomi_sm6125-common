@@ -210,8 +210,16 @@ ro.surface_flinger.protected_contents=true
 ro.surface_flinger.enable_frame_rate_override=false
 
 # USB
+vendor.usb.controller=4e00000.dwc3
+vendor.usb.device=4e00000.ssusb
 vendor.usb.diag.func.name=diag
+vendor.usb.dpl.inst.name=dpl
+vendor.usb.qdss.inst.name=qdss
+vendor.usb.rmnet.func.name=gsi
+vendor.usb.rmnet.inst.name=rmnet
+vendor.usb.rndis.func.name=gsi
 vendor.usb.use_ffs_mtp=0
+vendor.usb.use_gadget_hal=0
 
 # Zygote
 zygote.critical_window.minute=10
