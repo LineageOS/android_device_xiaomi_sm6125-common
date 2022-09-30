@@ -52,6 +52,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="allow_video_call_in_low_battery" value="true" />
         <boolean name="config_enable_display_14digit_imei" value="false" />
         <boolean name="hide_lte_plus_data_icon_bool" value="false" />
+        <int name="lte_plus_threshold_bandwidth_khz_int" value="0"/>
         <!-- Determines whether UI extensions for video calls should be used or not -->
         <boolean name="video_call_use_ext" value="true" />
         <!-- Determines if a customized video ui support is required or not -->
