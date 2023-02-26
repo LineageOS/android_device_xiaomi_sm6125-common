@@ -63,7 +63,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.feature.incall_music.enable=true \
     vendor.audio.feature.multi_voice_session.enable=true \
     vendor.audio.feature.keep_alive.enable=false \
-    vendor.audio.feature.kpi_optimize.enable=true \
+    vendor.audio.feature.kpi_optimize.enable=false \
     vendor.audio.feature.maxx_audio.enable=false \
     vendor.audio.feature.ras.enable=true \
     vendor.audio.feature.record_play_concurency.enable=false \
@@ -180,10 +180,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Netflix
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.netflix.bsp_rev=Q6125-17995-1
-
-# Perf
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
