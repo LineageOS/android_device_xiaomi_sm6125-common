@@ -4,8 +4,19 @@ genfscon sysfs /devices/soc/c176000.i2c/i2c-2/2-001d            u:object_r:sysfs
 # Camera
 genfscon sysfs /camera_sensorid/sensorid                        u:object_r:sysfs_graphics:s0
 
+# Display
+genfscon sysfs /devices/dsi_panel_driver                                             u:object_r:sysfs_graphics:s0
+genfscon sysfs /devices/platform/soc/5e00000.qcom,mdss_mdp/idle_encoder_mask         u:object_r:sysfs_graphics:s0
+genfscon sysfs /devices/platform/soc/5e00000.qcom,mdss_mdp/idle_state                u:object_r:sysfs_graphics:s0
+genfscon sysfs /devices/platform/soc/5e00000.qcom,mdss_mdp/idle_timeout_ms           u:object_r:sysfs_graphics:s0
+genfscon sysfs /devices/platform/soc/1c40000.qcom,spmi/spmi-0/spmi0-03/1c40000.qcom,spmi:qcom,pmi632@3:qcom,leds@d000/leds/red/device           u:object_r:sysfs_graphics:s0
+genfscon sysfs /devices/virtual/sec                                                  u:object_r:sysfs_graphics:s0
+
 # Touchpanel
 genfscon sysfs /touchpanel                                      u:object_r:sysfs_touchpanel:s0
+
+# Sched
+genfscon proc /sys/kernel/sched_energy_aware u:object_r:vendor_proc_energy_aware:s0
 
 # Wakeup source stats
 genfscon sysfs /devices/platform/soc/1610000.qcom,msm-eud/wakeup/wakeup                                                                                                                                                        u:object_r:sysfs_wakeup:s0
@@ -16,8 +27,10 @@ genfscon sysfs /devices/platform/soc/c800000.qcom,icnss/wakeup/wakeup           
 genfscon sysfs /devices/platform/soc/soc:gpio_keys/wakeup/wakeup                                                                                                                                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,msm-audio-apr/soc:qcom,msm-audio-apr:qcom,q6core-audio/soc:qcom,msm-audio-apr:qcom,q6core-audio:bolero-cdc/rx-macro/rx_swr_ctrl/wakeup/wakeup                                    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,msm-audio-apr/soc:qcom,msm-audio-apr:qcom,q6core-audio/soc:qcom,msm-audio-apr:qcom,q6core-audio:bolero-cdc/tx-macro/tx_swr_ctrl/wakeup/wakeup                                    u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/4a8c000.i2c/i2c-1/1-0028/wakeup/wakeup8                                                                                                                                                   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/5c0c000.qcom,cci/5c0c000.qcom,cci:qcom,camera@0/video4linux/video3/wakeup                                                                                                                 u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/5c0c000.qcom,cci/5c0c000.qcom,cci:qcom,camera@1/video4linux/video4/wakeup                                                                                                                 u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/5c0c000.qcom,cci/5c0c000.qcom,cci:qcom,camera@1/video4linux/video4/name                                                                                                                   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/5c0c000.qcom,cci/5c0c000.qcom,cci:qcom,camera@2/video4linux/video5/wakeup                                                                                                                 u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/5c0c000.qcom,cci/5c0c000.qcom,cci:qcom,camera@3/video4linux/video6/wakeup                                                                                                                 u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/5c0c000.qcom,cci/5c0c000.qcom,cci:qcom,camera@4/video4linux/video7/wakeup                                                                                                                 u:object_r:sysfs_wakeup:s0
