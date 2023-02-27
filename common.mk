@@ -212,7 +212,6 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.4-service \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-    android.hardware.renderscript@1.0-impl \
     android.frameworks.displayservice@1.0 \
     vendor.qti.hardware.display.allocator-service \
     vendor.display.config@2.0
@@ -424,10 +423,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libjson \
     libjson.vendor
-
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
 
 # RIL
 PRODUCT_PACKAGES += \
