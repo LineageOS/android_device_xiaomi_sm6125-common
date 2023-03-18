@@ -16,6 +16,24 @@
       "message": "You didn\u0027t labelled libperfmgr service on file_contexts",
       "revId": "c38ba5c3e9b99a0915c9d7ddecbfaa55227cd4ef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed0a824_8a7a2372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20352
+      },
+      "writtenOn": "2023-03-18T10:32:34Z",
+      "side": 1,
+      "message": "https://review.lineageos.org/c/LineageOS/android_device_xiaomi_sm6125-common/+/350032/1/sepolicy/vendor/file_contexts",
+      "parentUuid": "674a9c8d_506fd7fd",
+      "revId": "c38ba5c3e9b99a0915c9d7ddecbfaa55227cd4ef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
