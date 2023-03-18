@@ -52,6 +52,24 @@
       "parentUuid": "1ed0a824_8a7a2372",
       "revId": "c38ba5c3e9b99a0915c9d7ddecbfaa55227cd4ef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f58db04_28e001c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 24442
+      },
+      "writtenOn": "2023-03-18T10:36:06Z",
+      "side": 1,
+      "message": "Also the dsi_panel_driver and virtual/sec node are specific to pdx201, you don\u0027t need them on ginkgo/willow",
+      "parentUuid": "a06158e1_81e400e8",
+      "revId": "c38ba5c3e9b99a0915c9d7ddecbfaa55227cd4ef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
