@@ -136,6 +136,8 @@ ro.crypto.volume.options=::v2
 
 # Display
 ro.surface_flinger.use_color_management=true
+ro.sf.blurs_are_expensive=1
+ro.surface_flinger.supports_background_blur=1
 ro.vendor.sf.detect.aod.enable=true
 vendor.display.comp_mask=0
 vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
