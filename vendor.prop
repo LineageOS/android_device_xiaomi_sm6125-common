@@ -168,6 +168,7 @@ ro.vendor.qti.va_aosp.support=1
 # Graphics
 debug.force_no_blanking=true
 debug.sf.auto_latch_unsignaled=0
+debug.sf.enable_gl_backpressure=0
 persist.sys.sf.color_mode=0
 persist.sys.sf.color_saturation=1.0
 persist.sys.sf.native_mode=2
