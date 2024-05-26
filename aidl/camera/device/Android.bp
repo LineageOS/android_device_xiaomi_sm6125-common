@@ -1,0 +1,34 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "camera.device-impl.sm6125",
+    defaults: ["android.hardware.graphics.common-ndk_shared"],
+    vendor: true,
+    srcs: [
+        "CameraDevice.cpp",
+        "CameraDeviceSession.cpp",
+        "convert.cpp",
+    ],
+    shared_libs: [
+        "android.hardware.camera.common-V1-ndk",
+        "android.hardware.camera.device-V1-ndk",
+        "libbinder_ndk",
+        "libcamera_metadata",
+        "libcutils",
+        "libfmq",
+        "libgralloctypes",
+        "libhidlbase",
+        "liblog",
+        "libui",
+        "libutils",
+    ],
+    static_libs: [
+        "android.hardware.camera.common-helper",
+        "libaidlcommonsupport",
+    ],
+    export_include_dirs: ["."],
+}
