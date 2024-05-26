@@ -1,0 +1,40 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "android.hardware.camera.provider-service.sm6125",
+    defaults: ["sm6125_camera3_defaults"],
+    compile_multilib: "32",
+    init_rc: ["android.hardware.camera.provider-service.sm6125.rc"],
+    vintf_fragments: ["android.hardware.camera.provider-service.sm6125.xml"],
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: [
+        "service.cpp",
+        "CameraProvider.cpp",
+    ],
+    shared_libs: [
+        "android.hardware.camera.common-V1-ndk",
+        "android.hardware.camera.device-V1-ndk",
+        "android.hardware.camera.provider-V1-ndk",
+        "camera.device-impl.sm6125",
+        "libbinder_ndk",
+        "libcamera_metadata",
+        "libcutils",
+        "libfmq",
+        "libhardware",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+    ],
+    static_libs: [
+        "android.hardware.camera.common-helper.sm6125",
+        "libaidlcommonsupport",
+    ],
+    header_libs: [
+        "libhardware_headers.camera3_sm6125",
+    ],
+}
