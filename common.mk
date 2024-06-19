@@ -214,6 +214,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libvndfwk_detect_jni.qti.vendor # Needed by CNE app
 
+# Radio AIDL wrapper
+PRODUCT_PACKAGES += \
+    android.hardware.radio-service.compat
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.zram \
