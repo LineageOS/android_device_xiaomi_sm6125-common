@@ -196,6 +196,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/sysconfig/qti_whitelist.xml
 
+# Radio AIDL wrapper
+PRODUCT_PACKAGES += \
+    android.hardware.radio-service.compat
+
 # Rootdir
 PRODUCT_PACKAGES += \
     init.class_main.sh \
