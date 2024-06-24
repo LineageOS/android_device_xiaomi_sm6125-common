@@ -210,8 +210,9 @@ ro.surface_flinger.protected_contents=true
 ro.surface_flinger.enable_frame_rate_override=false
 
 # USB
+sys.usb.mtp.batchcancel=1
 vendor.usb.diag.func.name=diag
-vendor.usb.use_ffs_mtp=0
+vendor.usb.use_ffs_mtp=1
 
 # Zygote
 zygote.critical_window.minute=10
