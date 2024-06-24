@@ -275,7 +275,6 @@ on boot
     setprop vendor.usb.rmnet.inst.name "rmnet"
     setprop vendor.usb.dpl.inst.name "dpl"
     setprop vendor.usb.qdss.inst.name "qdss"
-    setprop sys.usb.configfs 1
 
 service vendor.pd_mapper /vendor/bin/pd-mapper
     class core
@@ -311,7 +310,6 @@ on property:sys.shutdown.requested=*
 
 on property:init.svc.vendor.charger=running
     setprop vendor.usb.controller 4e00000.dwc3
-    setprop sys.usb.configfs 1
 
     chown system system /sys/class/leds/red/brightness
     write /sys/class/leds/red/brightness 255
