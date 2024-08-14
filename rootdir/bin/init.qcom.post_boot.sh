@@ -3106,10 +3106,6 @@ case "$target" in
             echo 85 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_load
             echo 85 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_load
 
-            #set schedtune.boost to 10 for camera 60fps perview +60 fps recorder perf.
-            #echo 10 > /dev/stune/foreground/schedtune.boost
-            echo 1 > /dev/stune/foreground/schedtune.prefer_idle
-
             # Set Memory parameters
             configure_memory_parameters
 
