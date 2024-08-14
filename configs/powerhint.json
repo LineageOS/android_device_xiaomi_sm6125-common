@@ -58,6 +58,27 @@
       "ResetOnInit": true
     },
     {
+      "Name": "UclampTAMin",
+      "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "78",
+        "100"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampFgMin",
+      "Path": "/dev/cpuctl/foreground/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "100"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
       "Name": "GPUMaxFreq",
       "Path": "/sys/class/kgsl/kgsl-3d0/devfreq/max_freq",
       "Values": ["900000000"],
@@ -152,6 +173,12 @@
     },
     {
       "PowerHint": "INTERACTION",
+      "Node": "UclampTAMin",
+      "Duration": 0,
+      "Value": "78"
+    },
+    {
+      "PowerHint": "INTERACTION",
       "Node": "CPUBWHystTriggerCount",
       "Duration": 500,
       "Value": "0"
@@ -191,6 +218,18 @@
       "Node": "CPULittleClusterMinFreq",
       "Duration": 3000,
       "Value": "1305600"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampTAMin",
+      "Duration": 3000,
+      "Value": "100"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampFgMin",
+      "Duration": 3000,
+      "Value": "100"
     },
     {
       "PowerHint": "LAUNCH",
