@@ -191,6 +191,8 @@ bool CameraProvider::initialize() {
 
     mNumberOfLegacyCameras = mModule->getNumberOfCameras();
     for (int i = 0; i < mNumberOfLegacyCameras; i++) {
+        mLegacyCameras.insert(i);
+
         struct camera_info info;
         auto rc = mModule->getCameraInfo(i, &info);
         if (rc != NO_ERROR) {
@@ -332,7 +334,7 @@ ndk::ScopedAStatus CameraProvider::setCallback(
     for (auto const& statusPair : mCameraStatusMap) {
         int id = std::stoi(statusPair.first);
         auto status = static_cast<CameraDeviceStatus>(statusPair.second);
-        if (id >= mNumberOfLegacyCameras && status != CameraDeviceStatus::NOT_PRESENT) {
+        if (!mLegacyCameras.contains(id) && status != CameraDeviceStatus::NOT_PRESENT) {
             addDeviceNames(id, status, true);
         }
     }
@@ -355,7 +357,7 @@ ndk::ScopedAStatus CameraProvider::getCameraIdList(std::vector<std::string>* _ai
     }
 
     for (auto const& deviceNamePair : mCameraDeviceNames) {
-        if (std::stoi(deviceNamePair.first) >= mNumberOfLegacyCameras) {
+        if (!mLegacyCameras.contains(std::stoi(deviceNamePair.first))) {
             // External camera devices must be reported through the device status change callback,
             // not in this list.
             continue;
