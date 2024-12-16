@@ -21,6 +21,7 @@ cc_binary {
         "android.hardware.camera.device-V1-ndk",
         "android.hardware.camera.provider-V1-ndk",
         "camera.device-impl.sm6125",
+        "libbase",
         "libbinder_ndk",
         "libcamera_metadata",
         "libcutils",
