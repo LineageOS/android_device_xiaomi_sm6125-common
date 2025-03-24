@@ -41,6 +41,9 @@
 #include "vendor_init.h"
 #include "property_service.h"
 
+using android::base::GetProperty;
+using std::string;
+
 char const *heapstartsize;
 char const *heapgrowthlimit;
 char const *heapsize;
@@ -48,8 +51,26 @@ char const *heapminfree;
 char const *heapmaxfree;
 char const *heaptargetutilization;
 
+char const *device;
+char const *model;
+string region;
+string hwversion;
+
 void check_device()
 {
+    if (GetProperty("ro.build.product", "") != "laurel_sprout") {
+        region = GetProperty("ro.boot.hwc", "");
+        hwversion = GetProperty("ro.boot.hwversion", "");
+        if (region == "Global_B" && (hwversion == "18.31.0" ||
+            hwversion == "18.39.0" || hwversion == "19.39.0")) {
+            device = "willow";
+            model = "Redmi Note 8T";
+        } else {
+            device = "ginkgo";
+            model = "Redmi Note 8";
+        }
+    }
+
     struct sysinfo sys;
 
     sysinfo(&sys);
@@ -102,4 +123,26 @@ void vendor_load_properties()
     property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
     property_override("dalvik.vm.heapminfree", heapminfree);
     property_override("dalvik.vm.heapmaxfree", heapmaxfree);
+
+    if(GetProperty("ro.build.product", "") != "laurel_sprout") {
+        // Override all partitions' props
+        string prop_partitions[] = { "", "odm.", "product.", "system.",
+	                                "system_ext.", "bootimage.", "vendor." };
+
+        for (const string &prop : prop_partitions) {
+            property_override(("ro.product." + prop + "name").c_str(), device);
+            property_override(("ro.product." + prop + "device").c_str(), device);
+            property_override(("ro.product." + prop + "model").c_str(), model);
+            property_override(("ro." + prop + "build.product").c_str(), device);
+        }
+
+        // Set hardware revision
+        property_override("ro.boot.hardware.revision", hwversion.c_str());
+
+        // Set hardware SKU prop
+        property_override("ro.boot.product.hardware.sku", device);
+
+        // Set camera model for EXIF data
+        property_override("persist.vendor.camera.model", model);
+    }
 }
