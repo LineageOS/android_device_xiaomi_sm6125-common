@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c3cde6_d3441930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-03-29T10:39:51Z",
+      "side": 1,
+      "message": "You can replace with https://review.lineageos.org/c/LineageOS/android_device_xiaomi_sdm845-common/+/424734",
+      "revId": "f847188252e33e48eca0443b1588f5f427ba10e2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
