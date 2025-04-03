@@ -21,6 +21,7 @@ sys.panel.display                               u:object_r:vendor_fingerprint_pr
 vendor.fps_hal.                                 u:object_r:vendor_fingerprint_prop:s0
 vendor.panel.display                            u:object_r:vendor_fingerprint_prop:s0
 persist.vendor.fingerprint.                      u:object_r:vendor_fingerprint_prop:s0
+sys.fp.vendor                                   u:object_r:vendor_fingerprint_prop:s0
 
 # RIL
 ro.product.wt.boardid                           u:object_r:exported_system_prop:s0
