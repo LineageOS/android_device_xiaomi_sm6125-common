@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3bf4db1_cafc2747",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 31655
+      },
+      "writtenOn": "2025-04-20T21:37:37Z",
+      "side": 1,
+      "message": "Works with: https://review.lineageos.org/q/topic:sm8150-uffd",
+      "revId": "a292c894e02efd925bb76bf46371fb18be809eda",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
