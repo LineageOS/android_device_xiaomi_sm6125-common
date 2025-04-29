@@ -89,6 +89,8 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.qti \
     android.hardware.health-service.qti_recovery
 
+$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
+
 # IPACM
 PRODUCT_PACKAGES += \
     ipacm \
