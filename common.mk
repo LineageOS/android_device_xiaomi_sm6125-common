@@ -107,6 +107,8 @@ $(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):libinit_trinket)
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
 
+$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
+
 # LiveDisplay
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@2.0-service-sdm
