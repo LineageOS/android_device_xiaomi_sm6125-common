@@ -101,6 +101,8 @@ PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := true
 PRODUCT_PACKAGES += \
     android.hardware.light-service.lineage
 
+$(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):libinit_trinket)
+
 # Lineage Health
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
