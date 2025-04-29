@@ -96,9 +96,6 @@ TARGET_COPY_OUT_VENDOR := vendor
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := trinket
 
-# Power
-TARGET_POWER_LIBPERFMGR_MODE_EXTENSION_LIB := //$(COMMON_PATH):libperfmgr-ext-xiaomi
-
 # Properties
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
