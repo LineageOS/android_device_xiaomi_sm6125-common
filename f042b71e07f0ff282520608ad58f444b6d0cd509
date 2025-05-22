@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce96234b_c852b0b4",
+        "filename": "common.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-05-22T19:03:54Z",
+      "side": 1,
+      "message": "LOCAL_PATH always exists. That\u0027s why you should get rid of COMMON_PATH.",
+      "parentUuid": "47ee29ae_f4b9e94a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "f042b71e07f0ff282520608ad58f444b6d0cd509",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ffdf737_9dbcaef3",
         "filename": "common.mk",
         "patchSetId": 3
