@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7304a333_90297a5e",
+        "filename": "sepolicy/vendor/file_contexts",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-05-22T17:12:28Z",
+      "side": 1,
+      "message": "Should go before /data/vendor/goodix for alphabetical sorting",
+      "revId": "979cb1015bf09e2b5c1e9ae115de75076f47cb10",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
