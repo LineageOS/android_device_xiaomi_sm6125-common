@@ -28,41 +28,40 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cstdlib>
-#include <fstream>
 #include <string.h>
 #include <sys/sysinfo.h>
 #include <unistd.h>
+#include <cstdlib>
+#include <fstream>
 
 #include <android-base/properties.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
-#include "vendor_init.h"
 #include "property_service.h"
+#include "vendor_init.h"
 
 using android::base::GetProperty;
 using std::string;
 
-char const *heapstartsize;
-char const *heapgrowthlimit;
-char const *heapsize;
-char const *heapminfree;
-char const *heapmaxfree;
-char const *heaptargetutilization;
+char const* heapstartsize;
+char const* heapgrowthlimit;
+char const* heapsize;
+char const* heapminfree;
+char const* heapmaxfree;
+char const* heaptargetutilization;
 
-char const *device;
-char const *model;
+char const* device;
+char const* model;
 string region;
 string hwversion;
 
-void check_device()
-{
+void check_device() {
     if (GetProperty("ro.build.product", "") != "laurel_sprout") {
         region = GetProperty("ro.boot.hwc", "");
         hwversion = GetProperty("ro.boot.hwversion", "");
-        if (region == "Global_B" && (hwversion == "18.31.0" ||
-            hwversion == "18.39.0" || hwversion == "19.39.0")) {
+        if (region == "Global_B" &&
+            (hwversion == "18.31.0" || hwversion == "18.39.0" || hwversion == "19.39.0")) {
             device = "willow";
             model = "Redmi Note 8T";
         } else {
@@ -102,9 +101,8 @@ void check_device()
     }
 }
 
-void property_override(char const prop[], char const value[], bool add = true)
-{
-    auto pi = (prop_info *) __system_property_find(prop);
+void property_override(char const prop[], char const value[], bool add = true) {
+    auto pi = (prop_info*)__system_property_find(prop);
 
     if (pi != nullptr) {
         __system_property_update(pi, value, strlen(value));
@@ -113,8 +111,7 @@ void property_override(char const prop[], char const value[], bool add = true)
     }
 }
 
-void vendor_load_properties()
-{
+void vendor_load_properties() {
     check_device();
 
     property_override("dalvik.vm.heapstartsize", heapstartsize);
@@ -124,12 +121,12 @@ void vendor_load_properties()
     property_override("dalvik.vm.heapminfree", heapminfree);
     property_override("dalvik.vm.heapmaxfree", heapmaxfree);
 
-    if(GetProperty("ro.build.product", "") != "laurel_sprout") {
+    if (GetProperty("ro.build.product", "") != "laurel_sprout") {
         // Override all partitions' props
-        string prop_partitions[] = { "", "odm.", "product.", "system.",
-                                    "system_ext.", "bootimage.", "vendor." };
+        string prop_partitions[] = {"", "odm.", "product.", "system.",
+                                    "system_ext.", "bootimage.", "vendor."};
 
-        for (const string &prop : prop_partitions) {
+        for (const string& prop : prop_partitions) {
             property_override(("ro.product." + prop + "name").c_str(), device);
             property_override(("ro.product." + prop + "device").c_str(), device);
             property_override(("ro.product." + prop + "model").c_str(), model);
