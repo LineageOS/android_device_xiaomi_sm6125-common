@@ -22,6 +22,30 @@
       },
       "revId": "a66bea73e6c55c8a444e2fd324256576117cfe7e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "446d6018_ad2f4346",
+        "filename": "common.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-05-22T17:44:15Z",
+      "side": 1,
+      "message": "Same here, should be $(LOCAL_PATH).",
+      "parentUuid": "f31b0de5_e50af3f9",
+      "range": {
+        "startLine": 187,
+        "startChar": 64,
+        "endLine": 187,
+        "endChar": 74
+      },
+      "revId": "a66bea73e6c55c8a444e2fd324256576117cfe7e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
