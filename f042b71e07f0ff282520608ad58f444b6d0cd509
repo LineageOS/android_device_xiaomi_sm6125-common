@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f4bc71d_13325bf5",
+        "filename": "common.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-05-22T17:45:44Z",
+      "side": 1,
+      "message": "Do yourself a favor and pick something like this: https://review.lineageos.org/q/I92ebb465d08f56866dbb720f5a5e6479aaff189d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "f042b71e07f0ff282520608ad58f444b6d0cd509",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ffdf737_9dbcaef3",
         "filename": "common.mk",
         "patchSetId": 3
