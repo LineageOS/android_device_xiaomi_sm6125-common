@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b836ab2b_d34d7cbc",
+        "filename": "power/power-mode.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-05-22T17:20:31Z",
+      "side": 1,
+      "message": "Over 100 chars, run clang-format",
+      "revId": "3613f9bed84cd0b1e7836002b8de3edd689d4331",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
