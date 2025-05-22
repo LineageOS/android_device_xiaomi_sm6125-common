@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ffdf737_9dbcaef3",
+        "filename": "common.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-05-22T17:21:33Z",
+      "side": 1,
+      "message": "```suggestion\n$(call soong_config_set,libinit,vendor_init_lib,//$(COMMON_PATH):libinit_trinket)\n```",
+      "range": {
+        "startLine": 106,
+        "startChar": 52,
+        "endLine": 106,
+        "endChar": 62
+      },
+      "revId": "f042b71e07f0ff282520608ad58f444b6d0cd509",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
