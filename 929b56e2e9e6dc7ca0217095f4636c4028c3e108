@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405cf4cf_c32ee425",
+        "filename": "sepolicy/vendor/vendor_qti_init_shell.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-05-22T17:07:01Z",
+      "side": 0,
+      "message": "Unnecessary whitespace",
+      "revId": "929b56e2e9e6dc7ca0217095f4636c4028c3e108",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
