@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96aa6794_6626161b",
+        "filename": "common.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 31655
+      },
+      "writtenOn": "2025-05-23T16:36:08Z",
+      "side": 1,
+      "message": "getting: error: system/libhidl/vintfdata/Android.bp:47:1: module \"vendor_manifest.xml\" variant \"android_arm64_armv8-a_cortex-a73\": source path \"/manifest.xml\" does not exist. when i replaced COMMON_PATH with LOCAL_PATH. i dont think it works here.",
+      "parentUuid": "ce96234b_c852b0b4",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "f042b71e07f0ff282520608ad58f444b6d0cd509",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ffdf737_9dbcaef3",
         "filename": "common.mk",
         "patchSetId": 3
