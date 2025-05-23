@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f727bd0_a036d91e",
+        "filename": "common.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 31655
+      },
+      "writtenOn": "2025-05-23T17:49:36Z",
+      "side": 1,
+      "message": "So BoardConfig.mk can have COMMON_PATH, correct? I switched to LOCAL_PATH on both BoardConfig and common. Will check now only common.mk",
+      "parentUuid": "0451b378_ebb1ef0e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "f042b71e07f0ff282520608ad58f444b6d0cd509",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ffdf737_9dbcaef3",
         "filename": "common.mk",
         "patchSetId": 3
