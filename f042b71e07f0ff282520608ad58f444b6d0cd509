@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0451b378_ebb1ef0e",
+        "filename": "common.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-05-23T17:19:36Z",
+      "side": 1,
+      "message": "You don\u0027t set LOCAL_PATH again, just get rid of this line and replace all instances of COMMON_PATH with LOCAL_PATH in the rest of the file. See the change I linked and do the same in the target device tree as well. Note, this applies only to product makefiles.",
+      "parentUuid": "96aa6794_6626161b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "f042b71e07f0ff282520608ad58f444b6d0cd509",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ffdf737_9dbcaef3",
         "filename": "common.mk",
         "patchSetId": 3
