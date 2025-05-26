@@ -23,7 +23,7 @@ ro.boot.fpsensor                                u:object_r:vendor_fingerprint_pr
 sys.panel.display                               u:object_r:vendor_fingerprint_prop:s0
 vendor.fps_hal.                                 u:object_r:vendor_fingerprint_prop:s0
 vendor.panel.display                            u:object_r:vendor_fingerprint_prop:s0
-persist.vendor.fingerprint.                      u:object_r:vendor_fingerprint_prop:s0
+persist.vendor.fingerprint.                     u:object_r:vendor_fingerprint_prop:s0
 sys.fp.vendor                                   u:object_r:vendor_fingerprint_prop:s0
 
 # RIL

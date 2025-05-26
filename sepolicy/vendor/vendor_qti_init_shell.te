@@ -1,8 +1,6 @@
-allow vendor_qti_init_shell ctl_stop_prop:property_service set;
-
-allow vendor_qti_init_shell vendor_bluetooth_prop:property_service set;
 allow vendor_qti_init_shell vendor_wifi_vendor_data_file:dir search;
 allow vendor_qti_init_shell vendor_wifi_vendor_data_file:file r_file_perms;
 
-# To set powerhal init property
+set_prop(vendor_qti_init_shell, ctl_stop_prop)
+set_prop(vendor_qti_init_shell, vendor_bluetooth_prop)
 set_prop(vendor_qti_init_shell, vendor_power_prop)
