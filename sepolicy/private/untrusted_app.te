@@ -1,1 +1,0 @@
-allow untrusted_app window_service:service_manager { find };
