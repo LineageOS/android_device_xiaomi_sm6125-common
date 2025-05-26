@@ -1,3 +1,1 @@
-allow untrusted_app sysfs:dir r_dir_perms;
-
 get_prop(untrusted_app, vendor_persist_camera_prop)
