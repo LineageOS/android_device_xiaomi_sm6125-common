@@ -166,10 +166,8 @@ ro.fastbootd.available=true
 ro.vendor.qti.va_aosp.support=1
 
 # Graphics
-debug.egl.hw=0
 debug.force_no_blanking=true
 debug.mdpcomp.logs=0
-debug.sf.hw=0
 debug.sf.auto_latch_unsignaled=0
 persist.sys.sf.color_mode=0
 persist.sys.sf.color_saturation=1.0
