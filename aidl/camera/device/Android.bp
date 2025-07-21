@@ -6,7 +6,10 @@
 
 cc_library_shared {
     name: "camera.device-impl.sm6125",
-    defaults: ["android.hardware.graphics.common-ndk_shared"],
+    defaults: [
+        "android.hardware.graphics.common-ndk_shared",
+        "sm6125_camera3_defaults",
+    ],
     vendor: true,
     srcs: [
         "CameraDevice.cpp",
@@ -27,8 +30,11 @@ cc_library_shared {
         "libutils",
     ],
     static_libs: [
-        "android.hardware.camera.common-helper",
+        "android.hardware.camera.common-helper.sm6125",
         "libaidlcommonsupport",
+    ],
+    header_libs: [
+        "libhardware_headers.camera3_sm6125",
     ],
     export_include_dirs: ["."],
 }
