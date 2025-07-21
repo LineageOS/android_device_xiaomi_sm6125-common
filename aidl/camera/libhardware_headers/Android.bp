@@ -1,0 +1,24 @@
+soong_config_module_type {
+    name: "sm6125_camera3",
+    module_type: "cc_defaults",
+    config_namespace: "sm6125CameraVars",
+    bool_variables: [
+        "needs_get_cam_pos",
+    ],
+    properties: ["cflags"],
+}
+
+sm6125_camera3 {
+    name: "sm6125_camera3_defaults",
+    soong_config_variables: {
+        needs_sec_get_cam_pos: {
+            cflags: ["-DCAMERA_NEEDS_GET_CAM_POS"],
+        },
+    },
+}
+
+cc_library_headers {
+    name: "libhardware_headers.camera3_sm6125",
+    export_include_dirs: ["include"],
+    vendor_available: true,
+}
