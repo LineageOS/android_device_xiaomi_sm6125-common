@@ -1,5 +1,6 @@
 set_prop(vendor_init, vendor_alarm_boot_prop)
 set_prop(vendor_init, vendor_camera_prop)
+set_prop(vendor_init, vendor_camera_remapid_prop)
 set_prop(vendor_init, vendor_video_prop)
 set_prop(vendor_init, vendor_fingerprint_prop)
 
