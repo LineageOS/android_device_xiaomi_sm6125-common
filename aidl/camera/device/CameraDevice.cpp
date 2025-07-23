@@ -4,12 +4,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <cerrno>
 #define LOG_TAG "CamDev-impl"
+
+#include <android-base/parseint.h>
+#include <android-base/properties.h>
+#include <android-base/strings.h>
 
 #include "CameraDevice.h"
 #include "convert.h"
 
+#include <numeric>
 #include <cutils/trace.h>
+
+#define CAMERA_REMAP_IDS_PROPERTY "vendor.camera.remapid"
 
 namespace android {
 namespace hardware {
@@ -76,6 +84,31 @@ ndk::ScopedAStatus CameraDevice::getCameraCharacteristics(CameraMetadata* _aidl_
     return fromStatus(status);
 }
 
+static std::vector<int> getCameraRemapMap() {
+    // Return if property for remap is not defined or is empty
+    std::string remapProp = base::GetProperty(CAMERA_REMAP_IDS_PROPERTY, "");
+    if (remapProp.empty()) {
+        ALOGD("%s: camera IDs remapping property '%s' is empty", __func__,
+              CAMERA_REMAP_IDS_PROPERTY);
+        return {};
+    }
+    // Split camera IDs that are separated by space
+    std::vector<std::string> idRemap = base::Split(remapProp, " ");
+
+    // Initialize identity mapping
+    std::vector<int> cameraIdMap(idRemap.size());
+    std::iota(std::begin(cameraIdMap), std::end(cameraIdMap), 0);
+
+    for (int n = 0; n < idRemap.size(); n++) {
+        int mappedId;
+        // Replace n-th camera ID in the map if it is defined
+        if (n < idRemap.size() && base::ParseInt(idRemap[n], &mappedId)) {
+            cameraIdMap[n] = mappedId;
+        }
+    }
+    return cameraIdMap;
+}
+
 ndk::ScopedAStatus CameraDevice::getPhysicalCameraCharacteristics(
         const std::string& in_physicalCameraId, CameraMetadata* _aidl_return) {
     if (_aidl_return == nullptr) {
@@ -84,33 +117,40 @@ ndk::ScopedAStatus CameraDevice::getPhysicalCameraCharacteristics(
 
     Status status = initStatus();
     if (status == Status::OK) {
-        // Require module 2.5+ version.
-        if (mModule->getModuleApiVersion() < CAMERA_MODULE_API_VERSION_2_5) {
-            ALOGE("%s: get_physical_camera_info must be called on camera module 2.5 or newer",
-                  __FUNCTION__);
-            status = Status::INTERNAL_ERROR;
+        char* end;
+        errno = 0;
+        long id = strtol(in_physicalCameraId.c_str(), &end, 0);
+        if (id > INT_MAX || (errno == ERANGE && id == LONG_MAX) || id < INT_MIN ||
+            (errno == ERANGE && id == LONG_MIN) || *end != '\0') {
+            ALOGE("%s: Invalid physicalCameraId %s", __FUNCTION__, in_physicalCameraId.c_str());
+            status = Status::ILLEGAL_ARGUMENT;
         } else {
-            char* end;
-            errno = 0;
-            long id = strtol(in_physicalCameraId.c_str(), &end, 0);
-            if (id > INT_MAX || (errno == ERANGE && id == LONG_MAX) || id < INT_MIN ||
-                (errno == ERANGE && id == LONG_MIN) || *end != '\0') {
-                ALOGE("%s: Invalid physicalCameraId %s", __FUNCTION__, in_physicalCameraId.c_str());
+            auto cameraIdMap = getCameraRemapMap();
+            if (id <= cameraIdMap.size()) {
+                id = cameraIdMap[id];
+            }
+
+            camera_metadata_t* physicalInfo = nullptr;
+            struct camera_info info;
+            int ret = 0;
+            if (mModule->getModuleApiVersion() >= CAMERA_MODULE_API_VERSION_2_5) {
+                ret = mModule->getPhysicalCameraInfo((int)id, &physicalInfo);
+            } else {
+                ret = mModule->getCameraInfo((int)id, &info);
+                if (ret == OK) {
+                    physicalInfo = const_cast<camera_metadata *>(info.static_camera_characteristics);
+                }
+            }
+            if (ret == OK) {
+                convertToAidl(physicalInfo, _aidl_return);
+            } else if (ret == -EINVAL) {
+                ALOGE("%s: %s is not a valid physical camera Id outside of getCameraIdList()",
+                        __FUNCTION__, in_physicalCameraId.c_str());
                 status = Status::ILLEGAL_ARGUMENT;
             } else {
-                camera_metadata_t* physicalInfo = nullptr;
-                int ret = mModule->getPhysicalCameraInfo((int)id, &physicalInfo);
-                if (ret == OK) {
-                    convertToAidl(physicalInfo, _aidl_return);
-                } else if (ret == -EINVAL) {
-                    ALOGE("%s: %s is not a valid physical camera Id outside of getCameraIdList()",
-                          __FUNCTION__, in_physicalCameraId.c_str());
-                    status = Status::ILLEGAL_ARGUMENT;
-                } else {
-                    ALOGE("%s: Failed to get physical camera %s info: %s (%d)!", __FUNCTION__,
-                          in_physicalCameraId.c_str(), strerror(-ret), ret);
-                    status = Status::INTERNAL_ERROR;
-                }
+                ALOGE("%s: Failed to get physical camera %s info: %s (%d)!", __FUNCTION__,
+                        in_physicalCameraId.c_str(), strerror(-ret), ret);
+                status = Status::INTERNAL_ERROR;
             }
         }
     }

@@ -19,6 +19,7 @@ cc_library_shared {
     shared_libs: [
         "android.hardware.camera.common-V1-ndk",
         "android.hardware.camera.device-V1-ndk",
+        "libbase",
         "libbinder_ndk",
         "libcamera_metadata",
         "libcutils",
