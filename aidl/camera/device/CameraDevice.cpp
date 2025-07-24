@@ -65,7 +65,61 @@ ndk::ScopedAStatus CameraDevice::getCameraCharacteristics(CameraMetadata* _aidl_
         // Module 2.1+ codepath.
         struct camera_info info;
         int ret = mModule->getCameraInfo(mCameraIdInt, &info);
-        if (ret == OK) {
+        if (mCameraIdInt == 61) {
+            size_t entryCap =
+                    get_camera_metadata_entry_capacity(info.static_camera_characteristics);
+            size_t dataCap = get_camera_metadata_data_capacity(info.static_camera_characteristics);
+
+            camera_metadata_entry_t entry;
+            ret = find_camera_metadata_entry(
+                    const_cast<camera_metadata_t*>(info.static_camera_characteristics),
+                    ANDROID_LOGICAL_MULTI_CAMERA_PHYSICAL_IDS, &entry);
+
+            if (entry.count == 4) {
+                // We need one more byte for an additional number in the second camera ID
+                camera_metadata_t* metadata = allocate_camera_metadata(entryCap, dataCap + 1);
+                if (!metadata) {
+                    ALOGE("%s: Failed to allocate new camera metdata!", __FUNCTION__);
+                    status = Status::INTERNAL_ERROR;
+                }
+
+                ret = append_camera_metadata(metadata, info.static_camera_characteristics);
+                if (ret != OK) {
+                    ALOGE("%s: Failed to append camera metadata!", __FUNCTION__);
+                    free_camera_metadata(metadata);
+                    status = Status::INTERNAL_ERROR;
+                }
+
+                ret = find_camera_metadata_entry(metadata,
+                                                 ANDROID_LOGICAL_MULTI_CAMERA_PHYSICAL_IDS, &entry);
+                if (ret != OK) {
+                    ALOGE("%s: Failed to find ANDROID_LOGICAL_MULTI_CAMERA_PHYSICAL_IDS entry!",
+                          __FUNCTION__);
+                    free_camera_metadata(metadata);
+                    status = Status::INTERNAL_ERROR;
+                }
+
+                // ID 61 is supposed to be 0+20
+                const char ids[] =
+                        "0\0"
+                        "20\0";
+                const uint8_t* data = reinterpret_cast<const uint8_t*>(ids);
+                size_t dataSize = sizeof(ids) - 1;
+
+                ret = update_camera_metadata_entry(metadata, entry.index, data, dataSize, &entry);
+
+                if (ret != OK) {
+                    ALOGE("%s: Failed to update ANDROID_LOGICAL_MULTI_CAMERA_PHYSICAL_IDS entry!",
+                          __FUNCTION__);
+                    free_camera_metadata(metadata);
+                    status = Status::INTERNAL_ERROR;
+                }
+
+                convertToAidl(metadata, _aidl_return);
+
+                free_camera_metadata(metadata);
+            }
+        } else if (ret == OK) {
             convertToAidl(info.static_camera_characteristics, _aidl_return);
         } else {
             ALOGE("%s: get camera info failed!", __FUNCTION__);
