@@ -1,0 +1,18 @@
+cc_library_shared {
+    name: "camera.qcom",
+    relative_install_path: "hw",
+    srcs: ["camera.cpp"],
+    shared_libs: [
+        "libbase",
+        "libcamera_metadata",
+        "libdl",
+        "libhardware",
+        "liblog",
+        "libutils",
+    ],
+    static_libs: [
+        "android.hardware.camera.common-helper",
+    ],
+    vendor: true,
+    compile_multilib: "32",
+}
