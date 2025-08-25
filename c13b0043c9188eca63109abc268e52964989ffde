@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37a946bb_ec351d8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34244
+      },
+      "writtenOn": "2025-08-25T09:57:45Z",
+      "side": 1,
+      "message": "this is also not letting gallery app to do background media scan.",
+      "revId": "c13b0043c9188eca63109abc268e52964989ffde",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
