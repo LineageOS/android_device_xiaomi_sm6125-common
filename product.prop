@@ -6,7 +6,7 @@ audio.sys.offload.pstimeout.secs=3
 audio.sys.routing.latency=0
 
 # eBPF
-ro.bpf.kver_override=5.4.186
+ro.bpf.kver_override=5.4.299
 
 # RIL
 persist.vendor.qti.telephony.vt_cam_interface=2
