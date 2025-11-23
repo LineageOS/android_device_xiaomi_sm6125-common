@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a87d67bf_5e9e3aa1",
+        "filename": "vendor.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 34003
+      },
+      "writtenOn": "2025-11-23T20:18:27Z",
+      "side": 1,
+      "message": "Flag deprecated since 2022, should be removed: https://github.com/LineageOS/android_frameworks_native/commit/e5d57ea68c54b8b3fed717464427376c92b8f434",
+      "revId": "0dc779af7f9d38295f030c46163d0ab99bef4dfe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
