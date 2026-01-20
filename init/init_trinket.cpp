@@ -57,7 +57,7 @@ string region;
 string hwversion;
 
 void check_device() {
-    if (GetProperty("ro.build.product", "") != "laurel_sprout") {
+    if (GetProperty("ro.product.board", "") != "laurel_sprout") {
         region = GetProperty("ro.boot.hwc", "");
         hwversion = GetProperty("ro.boot.hwversion", "");
         if (region == "Global_B" &&
@@ -121,7 +121,7 @@ void vendor_load_properties() {
     property_override("dalvik.vm.heapminfree", heapminfree);
     property_override("dalvik.vm.heapmaxfree", heapmaxfree);
 
-    if (GetProperty("ro.build.product", "") != "laurel_sprout") {
+    if (GetProperty("ro.product.board", "") != "laurel_sprout") {
         // Override all partitions' props
         string prop_partitions[] = {"",           "odm.",   "product.", "system.", "system_ext.",
                                     "bootimage.", "vendor."};
