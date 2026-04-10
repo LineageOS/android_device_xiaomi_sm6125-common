@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb71f8f2_c6eab60f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32253
+      },
+      "writtenOn": "2026-04-10T09:57:52Z",
+      "side": 1,
+      "message": "you *may* want to do this as well (see `camera-skip-failed-ids` topic)",
+      "revId": "43cf00e7ae049bf6da4dadfee4d1d0c558550c92",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
