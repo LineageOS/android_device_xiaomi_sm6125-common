@@ -1,0 +1,15 @@
+[
+  {
+    "repository": "PixelOS-AOSP/android_hardware_xiaomi",
+    "target_path": "hardware/xiaomi"
+  },
+  {
+    "repository": "PixelOS-Devices/android_kernel_xiaomi_sm6125",
+    "target_path": "kernel/xiaomi/sm6125"
+  },
+  {
+    "remote": "gitlab",
+    "repository": "NoPrincessHere/proprietary_vendor_xiaomi_sm6125-common",
+    "target_path": "vendor/xiaomi/sm6125-common"
+  }
+]
