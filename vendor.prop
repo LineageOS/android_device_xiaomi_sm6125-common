@@ -203,6 +203,10 @@ persist.vendor.sensors.support_direct_channel=false
 ro.com.android.dataroaming=true
 ro.telephony.default_network=22,22
 
+## RAM
+ro.config.force_multi_window=1
+ro.config.low_ram=1
+
 # SurfaceFlinger
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.max_frame_buffer_acquired_buffers=3
