@@ -71,6 +71,8 @@ PRODUCT_PACKAGES += \
     gralloc.qcom \
     hwcomposer.qcom
 
+$(call soong_config_set_bool,libui,legacy_gralloc,true)
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
