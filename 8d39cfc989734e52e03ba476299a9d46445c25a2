@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "590d1fc6_a668370b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 27072
+      },
+      "writtenOn": "2026-08-03T06:38:05Z",
+      "side": 1,
+      "message": "I think it\u0027s better to set those properties from libinit and only for RAM size \u003c\u003d 4GB.",
+      "revId": "8d39cfc989734e52e03ba476299a9d46445c25a2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
