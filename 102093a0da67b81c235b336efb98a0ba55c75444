@@ -16,6 +16,24 @@
       "message": "As per the documentation:\n\nhttps://source.android.com/docs/core/graphics/unsignaled-buffer-latch\n\nIt seems better to have debug.sf.auto_latch_unsignaled enabled and debug.sf.latch_unsignaled disabled.",
       "revId": "102093a0da67b81c235b336efb98a0ba55c75444",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237322a9_d982800e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2026-08-13T13:45:32Z",
+      "side": 1,
+      "message": "The documentation is pretty outdated since debug.sf.latch_unsignaled no longer exists",
+      "parentUuid": "1b08f2ab_d63f38b0",
+      "revId": "102093a0da67b81c235b336efb98a0ba55c75444",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
