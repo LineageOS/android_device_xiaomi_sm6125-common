@@ -34,6 +34,24 @@
       "parentUuid": "1b08f2ab_d63f38b0",
       "revId": "102093a0da67b81c235b336efb98a0ba55c75444",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "751aaaf7_ee0e6260",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 27072
+      },
+      "writtenOn": "2026-08-14T08:48:09Z",
+      "side": 1,
+      "message": "debug.sf.auto_latch_unsignaled enabled behavior is preferable though.",
+      "parentUuid": "237322a9_d982800e",
+      "revId": "102093a0da67b81c235b336efb98a0ba55c75444",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
