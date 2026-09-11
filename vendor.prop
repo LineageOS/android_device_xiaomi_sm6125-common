@@ -122,6 +122,7 @@ persist.vendor.camera.perflock.enable=0
 vendor.camera.not.cts.apk=1
 vendor.camera.not.ctsverify.apk=1
 vendor.camera.skip_failed_ids=true
+persist.vendor.camera.limited.capability=2
 
 # Chipset
 ro.soc.manufacturer=QTI
